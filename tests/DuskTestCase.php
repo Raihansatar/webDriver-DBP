@@ -19,9 +19,9 @@ abstract class DuskTestCase extends BaseTestCase
      */
     public static function prepare()
     {
-        if (! static::runningInSail()) {
+        // if (! static::runningInSail()) {
             static::startChromeDriver();
-        }
+        // }
     }
 
     /**
@@ -31,21 +31,24 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function driver()
     {
-        $options = (new ChromeOptions)->addArguments(collect([
-            '--window-size=1920,1080',
-        ])->unless($this->hasHeadlessDisabled(), function ($items) {
-            return $items->merge([
-                '--disable-gpu',
-                '--headless',
-            ]);
-        })->all());
-
         return RemoteWebDriver::create(
-            $_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515',
-            DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY, $options
-            )
+            'http://localhost:4444', DesiredCapabilities::phantomjs()
         );
+        // $options = (new ChromeOptions)->addArguments(collect([
+        //     '--window-size=1920,1080',
+        // ])->unless($this->hasHeadlessDisabled(), function ($items) {
+        //     return $items->merge([
+        //         '--disable-gpu',
+        //         '--headless',
+        //     ]);
+        // })->all());
+
+        // return RemoteWebDriver::create(
+        //     $_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515',
+        //     DesiredCapabilities::chrome()->setCapability(
+        //         ChromeOptions::CAPABILITY, $options
+        //     )
+        // );
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\WebScrapingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestScrapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('/test',[WebScrapingController::class, 'index']);
+// Route::get('/test1',[TestScrapController::class, 'urlSpider']);
